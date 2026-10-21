@@ -292,28 +292,25 @@ body {
 
 .scenarios-grid {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 transparent;
 }
 
 .scenario-pill {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
   background: #ffffff;
   border: 1px solid var(--border-card);
   border-radius: var(--radius-sm);
-  padding: 10px 14px;
+  padding: 9px 14px;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   font-size: 0.84rem;
   font-weight: 500;
   color: var(--text-muted);
   transition: all 0.2s ease;
-  white-space: nowrap;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
