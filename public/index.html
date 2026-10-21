@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Simulador de Pré-Análise Auto D0 e Governança de IA - Seguradora Horizonte. Motor determinístico de regras críticas e testes de guardrails para sinistros.">
+  <title>Simulador de Pré-Análise Auto D0 | Seguradora Horizonte</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-background">
+    <div class="glow-orb orb-primary"></div>
+    <div class="glow-orb orb-secondary"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Header / Navbar -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <div class="brand-badge">SEGURADORA HORIZONTE &bull; GOVERNANÇA DE IA</div>
+          <h1 class="brand-title">Simulador de Pré-Análise Auto D0</h1>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="btn-run-pytest-cenario" class="btn btn-primary" title="Executar teste unitário no Pytest para o cenário que está configurado na tela">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 2v7.31M14 9.3V1.99M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"/>
+          </svg>
+          <span>Validar Cenário no Pytest</span>
+        </button>
+
+        <button id="btn-run-pytest" class="btn btn-secondary" title="Executar os 9 testes canônicos de regressão do pytest">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 11 12 14 22 4"/>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+          <span>Suíte Completa (9 Testes)</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Barra de Cenários Prontos -->
+    <section class="scenarios-section">
+      <div class="section-label">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="16" x2="12" y2="12"/>
+          <line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+        <span>Cenários de Teste Rápidos (Casos Reais do Case):</span>
+      </div>
+      <div class="scenarios-grid" id="scenarios-container">
+        <!-- Injetado dinamicamente via JS -->
+      </div>
+    </section>
+
+    <!-- Conteúdo Principal: 2 Colunas -->
+    <main class="main-layout">
+      <!-- Coluna da Esquerda: Formulário de Entrada -->
+      <section class="form-column">
+        <form id="form-sinistro" onsubmit="return false;">
+          <!-- Card 1: Regras Inegociáveis (Apólice e Condutor) -->
+          <div class="card card-input">
+            <div class="card-header">
+              <div class="card-header-icon icon-blue">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="card-title">1. Apólice & Regras Inegociáveis</h2>
+                <p class="card-subtitle">Critérios determinísticos contratuais que NUNCA são flexibilizados por IA</p>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="toggles-grid">
+                <!-- Toggle 1: Prêmio Adimplente -->
+                <label class="toggle-control">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Prêmio Adimplente</span>
+                    <span class="toggle-desc">Pagamento da apólice regular na data do evento</span>
+                  </div>
+                  <input type="checkbox" id="input-premio" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+
+                <!-- Toggle 2: Condutor Autorizado -->
+                <label class="toggle-control">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Condutor Autorizado</span>
+                    <span class="toggle-desc">Condutor no volante é coberto/autorizado no contrato</span>
+                  </div>
+                  <input type="checkbox" id="input-condutor" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+
+                <!-- Toggle 3: Perfil Compatível -->
+                <label class="toggle-control">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Perfil de Risco Compatível</span>
+                    <span class="toggle-desc">Uso do veículo confere com o contratado (sem divergência)</span>
+                  </div>
+                  <input type="checkbox" id="input-perfil" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+
+              <!-- Datas: Sinistro e CNH -->
+              <div class="date-inputs-row">
+                <div class="form-group">
+                  <label for="input-data-sinistro">Data da Ocorrência do Sinistro</label>
+                  <input type="date" id="input-data-sinistro" value="2026-10-15" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                  <div class="label-with-action">
+                    <label for="input-validade-cnh">Validade da CNH do Condutor</label>
+                    <label class="checkbox-small">
+                      <input type="checkbox" id="input-cnh-ausente">
+                      <span>Sem CNH</span>
+                    </label>
+                  </div>
+                  <input type="date" id="input-validade-cnh" value="2028-05-20" class="form-input">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Sinais de IA e Fontes Externas -->
+          <div class="card card-input">
+            <div class="card-header">
+              <div class="card-header-icon icon-purple">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="card-title">2. Sinais de IA & Fontes Externas</h2>
+                <p class="card-subtitle">Extração multimodal, modelo preditivo de fraude e integrações de mercado</p>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <!-- Relato do Aviso de Sinistro -->
+              <div class="form-group">
+                <div class="label-with-action">
+                  <label for="input-relato">Relato do Segurado (Aviso de Sinistro)</label>
+                  <button type="button" id="btn-insert-injection" class="btn-link">
+                    + Injetar Prompt Malicioso
+                  </button>
+                </div>
+                <textarea id="input-relato" rows="3" class="form-input form-textarea" placeholder="Descreva os fatos ocorridos no sinistro...">Colisão traseira em semáforo na Av. Paulista sem vítimas.</textarea>
+              </div>
+
+              <!-- Sliders: ML Fraude e Confiança OCR -->
+              <div class="sliders-grid">
+                <div class="slider-box">
+                  <div class="slider-header">
+                    <span class="slider-label">Score ML de Fraude</span>
+                    <span class="slider-value" id="val-score-fraude">8%</span>
+                  </div>
+                  <input type="range" id="input-score-fraude" min="0" max="1" step="0.01" value="0.08" class="form-range range-danger">
+                  <div class="slider-helper">Corte para Sindicância: <strong>&ge; 75%</strong></div>
+                </div>
+
+                <div class="slider-box">
+                  <div class="slider-header">
+                    <span class="slider-label">Confiança OCR (Documentos)</span>
+                    <span class="slider-value" id="val-confianca-ocr">96%</span>
+                  </div>
+                  <input type="range" id="input-confianca-ocr" min="0" max="1" step="0.01" value="0.96" class="form-range range-success">
+                  <div class="slider-helper">Mínimo para STP direto: <strong>&ge; 85%</strong></div>
+                </div>
+              </div>
+
+              <!-- Status Base Restritiva & Parecer LLM -->
+              <div class="row-two-controls">
+                <div class="form-group">
+                  <label for="input-base-restritiva">Base Restritiva de Mercado</label>
+                  <select id="input-base-restritiva" class="form-input form-select">
+                    <option value="SEM_RESTRICAO_CONFIRMADA">Sem Restrição Confirmada (OK)</option>
+                    <option value="COM_RESTRICAO">Com Restrição Cadastrada (Risco)</option>
+                    <option value="RETORNO_VAZIO_OU_ERRO">Retorno Vazio / Erro de Integração</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="toggle-control toggle-control-block">
+                    <div class="toggle-info">
+                      <span class="toggle-title">Parecer do LLM Extrator</span>
+                      <span class="toggle-desc">LLM julgou coerência entre BO e aviso</span>
+                    </div>
+                    <input type="checkbox" id="input-llm-sugestao" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ação Principal do Form -->
+          <div class="form-actions">
+            <button type="button" id="btn-avaliar" class="btn btn-primary btn-large">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+              <span>Avaliar Sinistro D0</span>
+            </button>
+            <button type="button" id="btn-reset" class="btn btn-ghost" title="Restaurar padrão limpo">
+              Resetar
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Coluna da Direita: Painel de Decisão em Tempo Real -->
+      <section class="result-column">
+        <!-- Hero Decision Card -->
+        <div class="card card-result" id="card-result">
+          <div class="result-status-bar" id="result-status-bar"></div>
+          
+          <div class="result-hero-content">
+            <div class="result-header-meta">
+              <div class="decision-badge" id="decision-badge">
+                <span class="badge-dot"></span>
+                <span id="decision-text">Avaliando...</span>
+              </div>
+              <div class="eval-meta-badge" id="eval-meta-badge" title="Horário da última auditoria executada">
+                <span class="meta-icon">⏱</span>
+                <span id="eval-timestamp">Carregando...</span>
+                <span class="eval-counter" id="eval-counter">#1</span>
+              </div>
+            </div>
+
+            <h3 class="decision-title" id="decision-title">Aprovação Automática (STP)</h3>
+            <p class="decision-desc" id="decision-desc">
+              O sinistro cumpre todos os requisitos contratuais, sem alertas de fraude ou incerteza.
+            </p>
+
+            <div class="stp-indicator" id="stp-indicator">
+              <div class="stp-icon" id="stp-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <div class="stp-text">
+                <span class="stp-label">Roteamento STP sem intervenção humana:</span>
+                <strong class="stp-value" id="stp-value">PERMITIDO</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lista de Motivos / Alertas / Bloqueios -->
+          <div class="reasons-section" id="reasons-section">
+            <h4 class="reasons-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+              <span>Motivos de Bloqueio ou Alerta:</span>
+            </h4>
+            <ul class="reasons-list" id="reasons-list">
+              <!-- Injetado dinamicamente via JS -->
+            </ul>
+          </div>
+
+          <!-- Checklist de Governança & Guardrails -->
+          <div class="governance-checklist">
+            <h4 class="reasons-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              <span>Checklist de Governança em Tempo Real:</span>
+            </h4>
+
+            <div class="checklist-items">
+              <div class="check-item" id="check-inegociavel">
+                <span class="check-icon">✓</span>
+                <div class="check-content">
+                  <span class="check-label">Regras Inegociáveis</span>
+                  <span class="check-sub">Prêmio, condutor, perfil e CNH válida</span>
+                </div>
+                <span class="check-status" id="status-check-inegociavel">Regular</span>
+              </div>
+
+              <div class="check-item" id="check-injection">
+                <span class="check-icon">✓</span>
+                <div class="check-content">
+                  <span class="check-label">Guardrail Anti-Injection</span>
+                  <span class="check-sub">Proteção contra manipulação de prompt</span>
+                </div>
+                <span class="check-status" id="status-check-injection">Seguro</span>
+              </div>
+
+              <div class="check-item" id="check-fraude">
+                <span class="check-icon">✓</span>
+                <div class="check-content">
+                  <span class="check-label">Score ML & Mercado</span>
+                  <span class="check-sub">Ponto de corte de sindicância (< 75%)</span>
+                </div>
+                <span class="check-status" id="status-check-fraude">Baixo Risco</span>
+              </div>
+
+              <div class="check-item" id="check-ocr">
+                <span class="check-icon">✓</span>
+                <div class="check-content">
+                  <span class="check-label">Qualidade Documental OCR</span>
+                  <span class="check-sub">Índice mínimo de legibilidade (&ge; 85%)</span>
+                </div>
+                <span class="check-status" id="status-check-ocr">Alta Confiança</span>
+              </div>
+            </div>
+
+            <!-- Botão de Auditoria Pytest dentro do Card -->
+            <div class="result-card-actions">
+              <button type="button" id="btn-testar-cenario-card" class="btn btn-secondary btn-full">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M10 2v7.31M14 9.3V1.99M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"/>
+                </svg>
+                <span>Auditar Cenário Atual com Pytest</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal / Drawer do Runner de Pytest -->
+    <div class="modal-overlay" id="pytest-modal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-header-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="4 17 10 11 4 5"/>
+              <line x1="12" y1="19" x2="20" y2="19"/>
+            </svg>
+            <h3 id="modal-title-text">Execução de Teste Automatizado (Pytest)</h3>
+          </div>
+          <button id="btn-close-modal" class="btn-icon">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="terminal-status" id="terminal-status">
+            <span class="spinner" id="terminal-spinner"></span>
+            <span id="terminal-status-msg">Executando pytest...</span>
+          </div>
+          <pre class="terminal-output" id="terminal-output">Aguardando execução...</pre>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-toggle-test-mode" class="btn btn-ghost">
+            Alternar para Suíte Completa
+          </button>
+          <button id="btn-re-run-pytest" class="btn btn-primary">
+            Executar Novamente
+          </button>
+          <button id="btn-modal-ok" class="btn btn-secondary">
+            Fechar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
